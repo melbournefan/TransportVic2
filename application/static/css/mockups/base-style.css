@@ -1,4 +1,22 @@
 @font-face {
+  font-family: "NetworkSansMedium";
+  font-display: fallback;
+  src: local('Network Sans 2018 Medium'), url(/static/fonts/NetworkSans-2018-Medium.ttf);
+}
+
+@font-face {
+  font-family: "NetworkSansBold";
+  font-display: fallback;
+  src: local('Network Sans 2018 Bold'), url(/static/fonts/NetworkSans-2018-Bold.ttf);
+}
+
+@font-face {
+  font-family: "NetworkSansRegular";
+  font-display: fallback;
+  src: local('Network Sans 2018 Regular'), url(/static/fonts/NetworkSans-2018-Regular.ttf);
+}
+
+/* @font-face {
   font-family: "NetworkSansBold";
   font-display: fallback;
   font-style: bold;
@@ -23,7 +41,7 @@
   font-family: "Helvetica";
   font-display: fallback;
   src: local('Helvetica'), local('Helv'), local('Helvetica Neue'), local("Arial");
-}
+} */
 
 html, body {
   margin: 0;
