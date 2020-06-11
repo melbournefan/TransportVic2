@@ -4,14 +4,16 @@ html
     script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.26/moment-timezone-with-data-10-year-range.min.js')
     link(rel='stylesheet' href='/static/css/jmss-screens/base-style.css')
-    link(rel='stylesheet' href='/static/css/jmss-screens/big-screen.css')
+    //-link(rel='stylesheet' href='/static/css/jmss-screens/big-screen.css')
     link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto&display=swap')
-    script.
+    //- script.
       setTimeout(() => location.reload(), 1000 * 60)
       setInterval(() => {
         $('.topRow span.time').textContent = moment.tz('Australia/Melbourne').format('h:mmA').toLowerCase()
       }, 1000)
   body
+    iframe(src='https://vic.transportsg.me/mockups/fss/platform/*/huntingdale')
+  //- body
     div.topRow
       div
         span.title Monash University PT Connections

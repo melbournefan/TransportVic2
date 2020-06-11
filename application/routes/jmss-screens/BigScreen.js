@@ -66,60 +66,63 @@ function filterDepartures(departures) {
 }
 
 router.get('/', async (req, res) => {
-  if (lock) {
-    return await new Promise(resolve => {
-      lock.on('done', data => {
-        res.render('jmss-screens/big-screen', data)
-      })
-    })
-  }
 
-  lock = new EventEmitter()
-
-  let busLoopDepartures = filterDepartures(await getBusLoopDepartures())
-
-  let busGroups = busLoopDepartures.map(departure => departure.routeNumber + '-' + departure.direction)
-    .filter((e, i, a) => a.indexOf(e) === i)
-  let busDepartures = busGroups.reduce((acc, group) => {
-    acc[group] = busLoopDepartures.filter(departure => departure.routeNumber + '-' + departure.direction === group).slice(0, 2)
-    return acc
-  }, {})
-
-  busDepartures = Object.values(busDepartures)
-
-  const huntingdale = (await res.db.getCollection('stops').findDocument({
-    stopName: 'Huntingdale Railway Station'
-  }))
-  const clayton = (await res.db.getCollection('stops').findDocument({
-    stopName: 'Clayton Railway Station'
-  }))
-
-  let huntingdaleDepartures = filterDepartures(await getMetroDepartures(huntingdale, res.db))
-
-  let metroGroups = huntingdaleDepartures.map(departure => departure.trip.direction)
-    .filter((e, i, a) => a.indexOf(e) === i)
-  let metroDepartures = metroGroups.reduce((acc, group) => {
-    acc[group] = huntingdaleDepartures.filter(departure => departure.trip.direction === group).slice(0, 2)
-    return acc
-  }, {})
-
-  let vlineDepartures = await getVLineDepartures(clayton, res.db)
-  vlineDepartures = vlineDepartures.map(d => {
-    d.actualDepartureTime = d.scheduledDepartureTime
-    return d
-  })
-  vlineDepartures = filterDepartures(vlineDepartures)
-  let nextVLineDeparture = vlineDepartures.filter(departure => {
-    return departure.trip.direction === 'Down' || departure.trip.runID % 2 === 1
-  })[0]
-
-  let currentTime = utils.now().format('h:mmA').toLowerCase()
-
-  let data = { busDepartures, metroDepartures, nextVLineDeparture, currentTime }
-  lock.emit('done', data)
-  lock = null
-
-  res.render('jmss-screens/big-screen', data)
+  res.render('jmss-screens/big-screen')
+  
+  // if (lock) {
+  //   return await new Promise(resolve => {
+  //     lock.on('done', data => {
+  //       res.render('jmss-screens/big-screen', data)
+  //     })
+  //   })
+  // }
+  //
+  // lock = new EventEmitter()
+  //
+  // let busLoopDepartures = filterDepartures(await getBusLoopDepartures())
+  //
+  // let busGroups = busLoopDepartures.map(departure => departure.routeNumber + '-' + departure.direction)
+  //   .filter((e, i, a) => a.indexOf(e) === i)
+  // let busDepartures = busGroups.reduce((acc, group) => {
+  //   acc[group] = busLoopDepartures.filter(departure => departure.routeNumber + '-' + departure.direction === group).slice(0, 2)
+  //   return acc
+  // }, {})
+  //
+  // busDepartures = Object.values(busDepartures)
+  //
+  // const huntingdale = (await res.db.getCollection('stops').findDocument({
+  //   stopName: 'Huntingdale Railway Station'
+  // }))
+  // const clayton = (await res.db.getCollection('stops').findDocument({
+  //   stopName: 'Clayton Railway Station'
+  // }))
+  //
+  // let huntingdaleDepartures = filterDepartures(await getMetroDepartures(huntingdale, res.db))
+  //
+  // let metroGroups = huntingdaleDepartures.map(departure => departure.trip.direction)
+  //   .filter((e, i, a) => a.indexOf(e) === i)
+  // let metroDepartures = metroGroups.reduce((acc, group) => {
+  //   acc[group] = huntingdaleDepartures.filter(departure => departure.trip.direction === group).slice(0, 2)
+  //   return acc
+  // }, {})
+  //
+  // let vlineDepartures = await getVLineDepartures(clayton, res.db)
+  // vlineDepartures = vlineDepartures.map(d => {
+  //   d.actualDepartureTime = d.scheduledDepartureTime
+  //   return d
+  // })
+  // vlineDepartures = filterDepartures(vlineDepartures)
+  // let nextVLineDeparture = vlineDepartures.filter(departure => {
+  //   return departure.trip.direction === 'Down' || departure.trip.runID % 2 === 1
+  // })[0]
+  //
+  // let currentTime = utils.now().format('h:mmA').toLowerCase()
+  //
+  // let data = { busDepartures, metroDepartures, nextVLineDeparture, currentTime }
+  // lock.emit('done', data)
+  // lock = null
+  //
+  // res.render('jmss-screens/big-screen', data)
 })
 
 module.exports = router
