@@ -41,12 +41,8 @@ html
           return waitingClass
         }
       - for (let n = 0; n < 3; n++)
-        -
-          let size = 9
-          let columnSize = n === 2 ? 2 : size 
-          let columnGroups = busDepartures.slice(n * size, n * size + size)
-          let padded = [...columnGroups, ...Array(size).fill([])].slice(0, columnSize)
-          
+        - let size = 9
+        - let nGroups = busDepartures.slice(n * size, n * size + size)
         div.departureColumn
           for group in padded
             -
@@ -67,20 +63,13 @@ html
               div.destination
                 span Towards
                 span=destination.split('/')[0]
-              
-              if first
-                div(class='departureMinutes ' + getWaitingClass(first, [6, 4]))
-                  span=getDepartureText(first)
-                  if group[1]
-                    span='Next: ' + group[1].minutesToDeparture
-                  else
-                    span Next: --
-              else
-                
-                div(class='departureMinutes unknown')
-                  span --
-                  if group[1]
-                    span Next --
+
+              div(class='departureMinutes ' + getWaitingClass(group[0], [6, 4]))
+                span=getDepartureText(group[0])
+                if group[1]
+                  span='Next: ' + group[1].minutesToDeparture
+                else
+                  span Next: --
           if n == 2
             div.sub-heading
               span Huntingdale Metro Train Departures
@@ -100,10 +89,7 @@ html
             div.departureRow
               div.routeNumber.dandenong-group
                 span Platform
-                if metroDepartures.Up
-                  span 1
-                else
-                  span --
+                span 1
               div.destination
                 span Towards
                 if metroDepartures.Up
@@ -116,10 +102,7 @@ html
               div.departureRow
                 div.routeNumber.dandenong-group
                   span Platform
-                  if departure
-                    span 2
-                  else
-                    span --
+                  span 2
                 div.destination
                   span Towards
                   if departure
@@ -137,10 +120,7 @@ html
             div.departureRow
               div.routeNumber.vline
                 span Platform
-                if nextVLineDeparture
-                  span 2
-                else
-                  span --
+                span 2
               div.destination
                 span Towards
                 if nextVLineDeparture

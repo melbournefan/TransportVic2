@@ -56,7 +56,7 @@ div.headers {
 
 div.header {
   width: calc(var(--width) / 3);
-  height: calc(var(--width) * 0.03125);
+  height: 60px;
 
   display: flex;
   align-items: center;
@@ -90,18 +90,18 @@ div.departureColumn:nth-child(even) {
 }
 
 div.departureRow {
-  width: calc(var(--width) / 3 - var(--departurePadding));
-  height: calc((var(--departureHeight) - var(--departureMargin)) / 9 - var(--departureMargin));
-  margin-top: var(--departureMargin);
+  width: calc(var(--width) / 3 - 30px);
+  height: calc((810px - 10px) / 9 - 10px);
+  margin-top: 10px;
 
   display: flex;
   color: #f1f1f1;
 }
 
 div.routeNumber {
-  width: var(--routeNumberWidth);
-  height: calc((var(--departureHeight) - var(--departureMargin)) / 9 - var(--departureMargin));
-  font-size: calc(var(--width) * 0.03125);
+  width: 120px;
+  height: calc((810px - 10px) / 9 - 10px);
+  font-size: 60px;
 
   background-color: #d7832c;
   color: #f9f9f9;
@@ -140,8 +140,8 @@ div.destination > span:nth-child(2) {
 }
 
 div.departureMinutes {
-  width: var(--departureTimeWidth);
-  height: calc((var(--departureHeight) - var(--departureMargin)) / 9 - var(--departureMargin));
+  width: 100px;
+  height: calc((810px - 10px) / 9 - 10px);
 
   margin-left: auto;
 
@@ -183,9 +183,9 @@ div.unknown {
 
 div.sub-heading {
   width: calc(var(--width) / 3);
-  height: calc((var(--departureHeight) - var(--departureMargin)) / 9 - var(--departureMargin));
-  font-size: calc(var(--width) * 0.0197916);
-  margin-top: var(--departureMargin);
+  height: calc((810px - 10px) / 9 - 10px);
+  font-size: 38px;
+  margin-top: 10px;
 
   background-color: #2e2e2e;
   color: #f1f1f1;
