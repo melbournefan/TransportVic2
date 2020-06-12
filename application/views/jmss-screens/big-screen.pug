@@ -58,8 +58,8 @@ html
                 routeNumber = first.routeNumber
                 destination = first.destination
               } else {
-                routeNumber = '---'
-                destination = '---'
+                routeNumber = '--'
+                destination = '--'
               }
             div.departureRow
               div.routeNumber
@@ -100,7 +100,10 @@ html
             div.departureRow
               div.routeNumber.dandenong-group
                 span Platform
-                span 1
+                if metroDepartures.Up
+                  span 1
+                else
+                  span --
               div.destination
                 span Towards
                 if metroDepartures.Up
@@ -113,7 +116,10 @@ html
               div.departureRow
                 div.routeNumber.dandenong-group
                   span Platform
-                  span 2
+                  if departure
+                    span 2
+                  else
+                    span --
                 div.destination
                   span Towards
                   if departure
@@ -131,7 +137,10 @@ html
             div.departureRow
               div.routeNumber.vline
                 span Platform
-                span 2
+                if nextVLineDeparture
+                  span 2
+                else
+                  span --
               div.destination
                 span Towards
                 if nextVLineDeparture
