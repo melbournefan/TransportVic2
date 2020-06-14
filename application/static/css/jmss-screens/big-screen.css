@@ -152,8 +152,8 @@ div.departureMinutes {
 }
 
 div.departureMinutes > span:nth-child(1) {
-  font-size: calc(var(--width) * 0.024479);
-  letter-spacing: calc(var(--width) * -0.0010416);
+  font-size: 47px;
+  letter-spacing: -2px;
 }
 
 div.departureMinutes > span:nth-child(2) {
@@ -215,9 +215,9 @@ div.routeNumber.dandenong-group > span:nth-child(1), div.routeNumber.vline > spa
 }
 
 div.routeNumber.dandenong-group > span:nth-child(2), div.routeNumber.vline > span:nth-child(2) {
-  font-size: calc(var(--width) * 0.0286);
-  line-height: calc(var(--width) * 0.030208);
-  margin-top: calc(var(--width) * -0.002604);
+  font-size: 55px;
+  line-height: 58px;
+  margin-top: -5px;
 }
 
 div.departureRow.colour-guide {
